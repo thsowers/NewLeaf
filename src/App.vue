@@ -1,31 +1,17 @@
 <template>
   <!-- main wrapping component -->
-  <q-layout view="hHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf" id="app">
     <!-- Header -->
     <q-layout-header>
-      <!-- First row of header is a QToolbar -->
-      <q-toolbar>
-        <!-- showLeft is a model attached to left side drawer below -->
-        <q-btn
-                flat round dense
-                @click="showLeft = !showLeft"
-                icon="menu"
-        />
 
-        <q-toolbar-title>New Leaf</q-toolbar-title>
-
-      </q-toolbar>
-
-      <!-- Second row of header is a QTabs -->
-      <q-tabs>
+      <q-tabs id="nav">
         <q-route-tab slot="title" icon="person" to="/jobs" replace hide="icon" label="Positions"/>
-        <q-route-tab slot="title" icon="map" to="/jobs" replace hide="icon" label="Locations"/>
-        <q-route-tab slot="title" icon="home" to="/jobs" replace hide="icon" label="Companies"/>
+        <q-route-tab slot="title" icon="map" to="/map" replace hide="icon" label="Locations"/>
+        <q-route-tab slot="title" icon="home" to="/company" replace hide="icon" label="Companies"/>
       </q-tabs>
     </q-layout-header>
 
-    <!-- Left Side Drawer -->
-    <q-layout-drawer side="left" v-model="showLeft">
+    <q-layout-drawer id="drawer" side="left" v-model="showLeft">
       <q-list no-border link inset-separator>
         <q-item to="/docs">
           <q-item-side icon="computer"/>
@@ -34,37 +20,34 @@
       </q-list>
     </q-layout-drawer>
 
-    <!-- sub-routes get injected here: -->
     <q-page-container>
       <router-view/>
     </q-page-container>
   </q-layout>
 </template>
 
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component
+export default class HelloWorld extends Vue {
+  @Prop() private showLeft!: boolean
+}
+</script>
+
+
 <style lang="scss">
 #app {
-  font-family: 'Meslo LG L', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  #drawer {
+  }
 }
 
 #nav {
   padding: 10px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  background-color: #3d9970;
 }
 </style>
-
-<script>
-import QToolbarTitle from 'quasar-framework/src/components/toolbar/QToolbarTitle'
-export default {
-  components: { QToolbarTitle },
-}
-</script>
