@@ -1,51 +1,71 @@
-(() => {
-  const path = require("path");
-  const favicon = require("serve-favicon");
-  const compress = require("compression");
-  const cors = require("cors");
-  const helmet = require("helmet");
-  const logger = require("winston");
 
-  const feathers = require("@feathersjs/feathers");
-  const configuration = require("@feathersjs/configuration");
-  const express = require("@feathersjs/express");
-  const socketio = require("@feathersjs/socketio");
+// Configure Feathers app. (Can be re-generated.)
+import * as path from 'path'
+import favicon from 'serve-favicon'
+import compress from 'compression'
+import cors from 'cors'
+import helmet from 'helmet'
+import logger from './logger'
 
-  const middleware = require("./middleware");
-  const services = require("./services");
-  const appHooks = require("./app.hooks");
-  const channels = require("./channels");
+import feathers from '@feathersjs/feathers'
+import configuration from '@feathersjs/configuration'
+import express from '@feathersjs/express'
+import socketio from '@feathersjs/socketio'
 
-  const app = express(feathers());
+import middleware from './middleware'
+import services from './services'
+import appHooks from './app.hooks'
+import channels from './channels'
+// tslint:disable-next-line
+const generatorSpecs = require('../feathers-gen-specs.json')
 
-  // Load app configuration
-  app.configure(configuration());
-  // Enable CORS, security, compression, favicon and body parsing
-  app.use(cors());
-  app.use(helmet());
-  app.use(compress());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  app.use(favicon(path.join(app.get("public"), "favicon.ico")));
-  // Host the public folder
-  app.use("/", express.static(app.get("public")));
+// !code: imports // !end
+// !code: init // !end
 
-  // Set up Plugins and providers
-  app.configure(express.rest());
-  app.configure(socketio());
+const app = express(feathers())
+// !code: use_start // !end
 
-  // Configure other middleware (see `middleware/index.js`)
-  app.configure(middleware);
-  // Set up our services (see `services/index.js`)
-  app.configure(services);
-  // Set up event channels (see channels.js)
-  app.configure(channels);
+// Load app configuration
+app.configure(configuration())
+// !<DEFAULT> code: init_config
+app.set('generatorSpecs', generatorSpecs)
+// !end
 
-  // Configure a middleware for 404s and the error handler
-  app.use(express.notFound());
-  app.use(express.errorHandler({ logger }));
+// Enable security, CORS, compression, favicon and body parsing
+app.use(helmet())
+app.use(cors())
+app.use(compress())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(favicon(path.join(app.get('public'), 'favicon.ico')))
+// Host the public folder
+app.use('/', express.static(app.get('public')))
+// !code: use_end // !end
 
-  app.hooks(appHooks);
+// Set up Plugins and providers
+// !code: config_start // !end
+app.configure(express.rest())
+app.configure(socketio())
 
-  module.exports = app;
-})();
+
+// Configure other middleware (see `middleware/index.ts`)
+app.configure(middleware)
+// Set up our services (see `services/index.ts`)
+app.configure(services)
+// Set up event channels (see channels.ts)
+app.configure(channels)
+// !code: config_middle // !end
+
+// Configure a middleware for 404s and the error handler
+app.use(express.notFound())
+app.use(express.errorHandler({ logger }))
+// !code: config_end // !end
+
+app.hooks(appHooks)
+
+const moduleExports = app
+// !code: exports // !end
+export default moduleExports
+
+// !code: funcs // !end
+// !code: end // !end
