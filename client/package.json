@@ -10,6 +10,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "feathers-vuex": "^1.4.8",
     "quasar": "0.0.18",
     "quasar-extras": "^2.0.4",
     "quasar-framework": "^0.17.0",
@@ -18,10 +19,18 @@
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "@feathersjs/feathers": "latest",
+    "@feathersjs/socketio-client": "latest",
+    "@feathersjs/authentication-client": "latest",
+    "socket.io-client": "latest"
   },
   "devDependencies": {
+    "@types/feathersjs__authentication-client": "^1.0.4",
+    "@types/feathersjs__feathers": "^3.0.4",
+    "@types/feathersjs__socketio-client": "^1.0.1",
     "@types/jest": "^23.1.4",
+    "@types/socket.io-client": "^1.4.32",
     "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-e2e-cypress": "^3.0.0",
     "@vue/cli-plugin-eslint": "^3.0.0",
@@ -40,6 +49,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "ts-jest": "^23.0.0",
+    "tslint-config-prettier": "^1.15.0",
     "typescript": "^3.0.0",
     "vue-cli-plugin-quasar": "^0.17.1",
     "vue-template-compiler": "^2.5.17"

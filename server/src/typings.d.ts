@@ -6,6 +6,13 @@
 // Application.
 declare module 'feathers-hooks-common'
 
+// Services.
+declare module 'feathers-mongodb'
+
+// GraphQL.
+declare module '@feathers-plus/graphql'
+declare module 'merge-graphql-schemas'
+
 // !code: more // !end
 
 // !code: funcs // !end

@@ -18,6 +18,42 @@
       "socketio"
     ]
   },
-  "services": {},
-  "hooks": {}
+  "services": {
+    "todo": {
+      "name": "todo",
+      "nameSingular": "todo",
+      "subFolder": "",
+      "fileName": "todo",
+      "adapter": "mongodb",
+      "path": "/todo",
+      "isAuthEntity": false,
+      "graphql": false
+    },
+    "jobs": {
+      "name": "jobs",
+      "nameSingular": "job",
+      "subFolder": "",
+      "fileName": "jobs",
+      "adapter": "mongodb",
+      "path": "/jobs",
+      "isAuthEntity": false,
+      "graphql": true
+    }
+  },
+  "hooks": {},
+  "_hooks": {},
+  "connections": {
+    "mongodb": {
+      "database": "mongodb",
+      "adapter": "mongodb",
+      "connectionString": "mongodb://localhost:27017/newleaf"
+    }
+  },
+  "graphql": {
+    "path": "/graphql",
+    "strategy": "services",
+    "sqlInterface": null,
+    "requiresAuth": false,
+    "name": "graphql"
+  }
 }

@@ -1,6 +1,8 @@
 
 // Application interface. (Can be re-generated.)
 import { Application } from '@feathersjs/express';
+import { Job } from './services/jobs/jobs.interface'
+import { Todo } from './services/todo/todo.interface'
 // !code: imports // !end
 // !code: init // !end
 
@@ -17,6 +19,8 @@ import { Application } from '@feathersjs/express';
   });
  */
 export type App = Application<{
+  'jobs': Job,
+  'todo': Todo,
   // !code: moduleExports // !end
 }>;
 // !code: funcs // !end

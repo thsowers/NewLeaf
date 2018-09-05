@@ -31,6 +31,13 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class HelloWorld extends Vue {
+  mounted() {
+    const { Todo } = this.$FeathersVuex
+    const todo = new Todo({ description: 'Do something!' })
+    console.log(todo)
+    console.log(todo.save()) // --> Creates the todo on the server.
+  }
+
   @Prop() private showLeft!: boolean
 }
 </script>
