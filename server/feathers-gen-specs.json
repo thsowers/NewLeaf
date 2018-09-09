@@ -10,7 +10,7 @@
     "environmentsAllowingSeedData": "",
     "seedData": false,
     "name": "newleaf",
-    "description": "Backend for New Leaf",
+    "description": "Project newleaf",
     "src": "src",
     "packager": "npm@>= 3.0.0",
     "providers": [
@@ -19,41 +19,24 @@
     ]
   },
   "services": {
-    "todo": {
-      "name": "todo",
-      "nameSingular": "todo",
+    "positions": {
+      "name": "positions",
+      "nameSingular": "position",
       "subFolder": "",
-      "fileName": "todo",
-      "adapter": "mongodb",
-      "path": "/todo",
+      "fileName": "positions",
+      "adapter": "nedb",
+      "path": "/positions",
       "isAuthEntity": false,
       "graphql": false
-    },
-    "jobs": {
-      "name": "jobs",
-      "nameSingular": "job",
-      "subFolder": "",
-      "fileName": "jobs",
-      "adapter": "mongodb",
-      "path": "/jobs",
-      "isAuthEntity": false,
-      "graphql": true
     }
   },
   "hooks": {},
   "_hooks": {},
   "connections": {
-    "mongodb": {
-      "database": "mongodb",
-      "adapter": "mongodb",
-      "connectionString": "mongodb://localhost:27017/newleaf"
+    "nedb": {
+      "database": "nedb",
+      "adapter": "nedb",
+      "connectionString": "nedb://../data"
     }
-  },
-  "graphql": {
-    "path": "/graphql",
-    "strategy": "services",
-    "sqlInterface": null,
-    "requiresAuth": false,
-    "name": "graphql"
   }
 }

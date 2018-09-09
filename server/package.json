@@ -1,14 +1,14 @@
 {
   "name": "newleaf",
-  "description": "Backend for New Leaf",
-  "version": "0.0.0",
-  "homepage": "",
+  "description": "Backend for newleaf",
+  "version": "0.1.0",
+  "homepage": "https://github.com/thsowers/newleaf",
   "main": "src",
   "keywords": [
     "feathers"
   ],
   "author": {
-    "name": "thsowers",
+    "name": "Tyler H. Sowers",
     "email": "thsowers@gmail.com"
   },
   "contributors": [],
@@ -31,7 +31,6 @@
     "compile": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@feathers-plus/graphql": "^1.9.0",
     "@feathersjs/configuration": "^2.0.2",
     "@feathersjs/errors": "^3.3.2",
     "@feathersjs/express": "^1.2.5",
@@ -41,12 +40,10 @@
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "feathers-hooks-common": "^4.16.3",
-    "feathers-mongodb": "^3.3.0",
-    "graphql-resolvers-ast": "^1.4.0",
+    "feathers-nedb": "^3.1.0",
     "helmet": "^3.13.0",
     "lodash.merge": "^4.6.1",
-    "merge-graphql-schemas": "^1.5.3",
-    "mongodb": "^3.1.4",
+    "nedb": "^1.8.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.1.0"
   },
@@ -58,12 +55,10 @@
     "@types/feathersjs__express": "^1.1.4",
     "@types/feathersjs__feathers": "^3.0.4",
     "@types/feathersjs__socketio": "^3.0.3",
-    "@types/graphql": "^0.13.4",
     "@types/helmet": "0.0.40",
     "@types/lodash.merge": "^4.6.4",
     "@types/mocha": "^5.2.5",
-    "@types/mongodb": "^3.1.4",
-    "@types/mongoose": "^5.2.9",
+    "@types/nedb": "^1.8.5",
     "@types/request-promise": "^4.1.42",
     "@types/serve-favicon": "^2.2.30",
     "@types/winston": "^2.4.4",

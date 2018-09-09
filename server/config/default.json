@@ -11,5 +11,5 @@
       ""
     ]
   },
-  "mongodb": "mongodb://localhost:27017/newleaf"
+  "nedb": "../data"
 }

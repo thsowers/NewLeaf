@@ -19,7 +19,6 @@ import channels from './channels'
 // tslint:disable-next-line
 const generatorSpecs = require('../feathers-gen-specs.json')
 
-import mongodb from './mongodb'
 // !code: imports // !end
 // !code: init // !end
 
@@ -48,8 +47,6 @@ app.use('/', express.static(app.get('public')))
 app.configure(express.rest())
 app.configure(socketio())
 
-// Configure database adapters
-app.configure(mongodb)
 
 // Configure other middleware (see `middleware/index.ts`)
 app.configure(middleware)

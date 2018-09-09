@@ -1,6 +1,6 @@
 
 /* tslint:disable:quotemark */
-// Validation definitions for validateSchema hook for service `jobs`. (Can be re-generated.)
+// Validation definitions for validateSchema hook for service `positions`. (Can be re-generated.)
 import { validateSchema } from 'feathers-hooks-common'
 import merge from 'lodash.merge'
 import ajv from 'ajv'
@@ -8,15 +8,15 @@ import ajv from 'ajv'
 // !code: init // !end
 
 // !<DEFAULT> code: set_id_type
-// tslint:disable-next-line no-unused-variable
+// tslint:disable-next-line:no-unused-variable
 const ID = 'string'
 // !end
 
 let base = merge({},
   // !<DEFAULT> code: base
   {
-    title: "Jobs",
-    description: "Jobs database.",
+    title: "Positions",
+    description: "Positions database.",
     required: [],
     uniqueItemProperties: [],
     properties: {}

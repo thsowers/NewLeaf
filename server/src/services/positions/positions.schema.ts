@@ -1,13 +1,13 @@
 
-// Define the Feathers schema for service `jobs`. (Can be re-generated.)
+// Define the Feathers schema for service `positions`. (Can be re-generated.)
 // !code: imports // !end
 // !code: init // !end
 
 // Define the model using JSON-schema
 let schema = {
   // !<DEFAULT> code: schema_header
-  title: 'Jobs',
-  description: 'Jobs database.',
+  title: 'Positions',
+  description: 'Positions database.',
   // !end
   // !code: schema_definitions // !end
 
@@ -32,12 +32,12 @@ let extensions = {
   // GraphQL generation.
   graphql: {
     // !code: graphql_header
-    name: 'Job',
+    name: 'Position',
     service: {
       sort: { _id: 1 },
     },
     // sql: {
-    //   sqlTable: 'Jobs',
+    //   sqlTable: 'Positions',
     //   uniqueKey: '_id',
     //   sqlColumn: {
     //     __authorId__: '__author_id__',
