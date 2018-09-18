@@ -3,7 +3,7 @@
         <q-list no-border link inset-separator>
             <q-item v-for="pos in positions" :to=pos._id>
                 <q-item-side icon="computer"/>
-                <q-item-main :label=pos.companyName :sublabel=pos.title />
+                <q-item-main :label=pos.title :sublabel=pos.description />
             </q-item>
         </q-list>
     </q-layout-drawer>

@@ -6,14 +6,17 @@
 
             <q-tabs id="nav">
                 <q-route-tab slot="title" icon="person" to="/jobs" replace
-                             hide="icon" label="Positions"></q-route-tab>
+                             hide="icon" label="Positions"/>
                 <q-route-tab slot="title" icon="map" to="/map" replace
                              hide="icon" label="Locations"/>
                 <q-route-tab slot="title" icon="home" to="/company" replace
                              hide="icon" label="Companies"/>
-            </q-tabs>
-        </q-layout-header>
 
+
+
+            </q-tabs>
+            <Add/>
+        </q-layout-header>
         <SideBar/>
 
         <q-page-container>
@@ -25,9 +28,10 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import SideBar from './views/SideBar'
+import Add from './components/Add'
 
 @Component({
-  components: { SideBar },
+  components: { Add, SideBar },
 })
 export default class HelloWorld extends Vue {
   mounted() {}
@@ -46,6 +50,7 @@ export default class HelloWorld extends Vue {
   #drawer {
   }
 }
+
 
 #nav {
   padding: 10px;
