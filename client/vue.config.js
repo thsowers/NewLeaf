@@ -2,7 +2,7 @@ module.exports = {
   pluginOptions: {
     quasar: {
       theme: 'mat',
-      importAll: true,
+      importAll: false,
     },
   },
   transpileDependencies: ['/node_modules/quasar-framework/'],
