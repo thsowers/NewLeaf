@@ -1,42 +1,40 @@
 <template>
-  <!-- main wrapping component -->
-  <q-layout view="hHh Lpr lFf" id="app">
-    <!-- Header -->
-    <q-layout-header>
+    <!-- main wrapping component -->
+    <q-layout view="hHh Lpr lFf" id="app">
+        <!-- Header -->
+        <q-layout-header>
 
-      <q-tabs id="nav">
-        <q-route-tab slot="title" icon="person" to="/jobs" replace hide="icon" label="Positions"/>
-        <q-route-tab slot="title" icon="map" to="/map" replace hide="icon" label="Locations"/>
-        <q-route-tab slot="title" icon="home" to="/company" replace hide="icon" label="Companies"/>
-      </q-tabs>
-    </q-layout-header>
+            <q-tabs id="nav">
+                <q-route-tab slot="title" icon="person" to="/jobs" replace
+                             hide="icon" label="Positions"/>
+                <q-route-tab slot="title" icon="map" to="/map" replace
+                             hide="icon" label="Locations"/>
+                <q-route-tab slot="title" icon="home" to="/company" replace
+                             hide="icon" label="Companies"/>
 
-    <q-layout-drawer id="drawer" side="left" v-model="showLeft">
-      <q-list no-border link inset-separator>
-        <q-item to="/docs">
-          <q-item-side icon="computer"/>
-          <q-item-main label="Company Name" sublabel="Position Name"/>
-        </q-item>
-      </q-list>
-    </q-layout-drawer>
 
-    <q-page-container>
-      <router-view/>
-    </q-page-container>
-  </q-layout>
+
+            </q-tabs>
+            <Add/>
+        </q-layout-header>
+        <SideBar/>
+
+        <q-page-container>
+            <router-view/>
+        </q-page-container>
+    </q-layout>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import SideBar from './views/SideBar'
+import Add from './components/Add'
 
-@Component
+@Component({
+  components: { Add, SideBar },
+})
 export default class HelloWorld extends Vue {
-  mounted() {
-    const { Todo } = this.$FeathersVuex
-    const todo = new Todo({ description: 'Do something!' })
-    console.log(todo)
-    console.log(todo.save()) // --> Creates the todo on the server.
-  }
+  mounted() {}
 
   @Prop() private showLeft!: boolean
 }
@@ -52,6 +50,7 @@ export default class HelloWorld extends Vue {
   #drawer {
   }
 }
+
 
 #nav {
   padding: 10px;

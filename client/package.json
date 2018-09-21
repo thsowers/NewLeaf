@@ -10,20 +10,21 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "feathers-vuex": "^1.4.8",
+    "@feathersjs/authentication-client": "latest",
+    "@feathersjs/feathers": "latest",
+    "@feathersjs/socketio-client": "latest",
+    "axios": "^0.18.0",
+    "feathers-vuex": "^1.5.0",
     "quasar": "0.0.18",
     "quasar-extras": "^2.0.4",
     "quasar-framework": "^0.17.0",
     "register-service-worker": "^1.0.0",
+    "socket.io-client": "latest",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "@feathersjs/feathers": "latest",
-    "@feathersjs/socketio-client": "latest",
-    "@feathersjs/authentication-client": "latest",
-    "socket.io-client": "latest"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@types/feathersjs__authentication-client": "^1.0.4",
