@@ -19,7 +19,7 @@
     "typescript": "^3.0.3"
   },
   "scripts": {
-    "serve": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.ts",
+    "serve": "nodemon --watch '**/*' -e ts,tsx --exec 'ts-node' ./server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
