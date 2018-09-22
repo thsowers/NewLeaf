@@ -19,7 +19,7 @@ router.put('/position/', async ctx => {
 })
 
 router.post('/position/:id', async ctx => {
-  ctx.body = await positions.update({ _id: ctx.params.id }, ctx.request.body)
+  ctx.body = await positions.update(ctx.params.id, ctx.request.body)
 })
 
 router.get('/positions', async ctx => {
@@ -27,9 +27,9 @@ router.get('/positions', async ctx => {
 })
 
 router.get('/position/:id', async ctx => {
-  ctx.body = await positions.findOne({ _id: ctx.params.id })
+  ctx.body = await positions.findOne(ctx.params.id)
 })
 
 router.delete('/position/:id', async ctx => {
-  ctx.body = await positions.remove({ _id: ctx.params.id })
+  ctx.body = await positions.remove(ctx.params.id)
 })
