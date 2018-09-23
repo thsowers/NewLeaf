@@ -26,17 +26,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
 import SideBar from './views/SideBar'
 import Add from './components/Add'
+import { mapState, mapActions } from 'vuex'
 
-@Component({
-  components: { Add, SideBar },
-})
-export default class HelloWorld extends Vue {
-  mounted() {}
-
-  @Prop() private showLeft!: boolean
+export default {
+  name: 'App',
+  components: { SideBar, Add },
+  computed: mapState({
+    positions: state => state.positions,
+  }),
+  methods: {
+    ...mapActions(['getPositions']),
+  },
+  mounted() {
+    this.getPositions()
+  },
 }
 </script>
 
@@ -50,7 +55,6 @@ export default class HelloWorld extends Vue {
   #drawer {
   }
 }
-
 
 #nav {
   padding: 10px;
