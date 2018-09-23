@@ -1,6 +1,6 @@
 <template>
-    <q-layout-drawer id="drawer" side="left" v-model="showLeft">
-        <q-list no-border link inset-separator>
+    <q-layout-drawer id="drawer" side="left" v-model="showLeft" no-scroll>
+        <q-list id="list" no-border link inset-separator no-scroll>
             <q-item v-for="pos in positions" :to=pos._id>
                 <q-item-side icon="computer"/>
                 <q-item-main :label=pos.title :sublabel=pos.description />
@@ -10,28 +10,28 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-import axios from 'axios'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { mapState, mapActions } from 'vuex'
 
 @Component({
-  components: { SideBar },
+  computed: mapState({
+    positions: state => state.positions,
+  }),
+  methods: {
+    ...mapActions(['getPositions']),
+  },
 })
 export default class SideBar extends Vue {
-  data() {
-    return {
-      positions: '',
-    }
-  }
-
+  showLeft = true
   mounted() {
-    axios
-      .get('http://localhost:8000/position')
-      .then(response => (this.positions = response.data.data))
+    //this.getPositions()
   }
-
-  @Prop() private showLeft!: boolean
 }
 </script>
 
-<style scoped>
+<style>
+#drawer {
+  overflow: auto !important;
+}
 </style>
