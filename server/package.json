@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.ts",
   "dependencies": {
+    "@koa/cors": "^2.2.2",
     "koa": "^2.5.3",
     "koa-body": "^4.0.4",
     "koa-json": "^2.0.2",
@@ -14,6 +15,7 @@
     "@types/koa": "^2.0.46",
     "@types/koa-json": "^2.0.18",
     "@types/koa-router": "^7.0.32",
+    "@types/koa__cors": "^2.2.3",
     "nodemon": "^1.18.4",
     "ts-node": "^7.0.1",
     "typescript": "^3.0.3"

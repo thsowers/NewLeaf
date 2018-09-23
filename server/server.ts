@@ -1,4 +1,5 @@
 import * as Koa from 'koa'
+import * as Cors from '@koa/cors'
 import * as Router from 'koa-router'
 import * as Json from 'koa-json'
 import * as Parser from 'koa-body'
@@ -11,6 +12,7 @@ const positions = db.get('positions')
 
 app.use(Json())
 app.use(Parser())
+app.use(Cors())
 app.use(router.routes())
 app.listen(3000)
 
