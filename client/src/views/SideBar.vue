@@ -1,6 +1,6 @@
 <template>
     <q-layout-drawer id="drawer" side="left" v-model="showLeft" no-scroll>
-        <q-list id="list" no-border link inset-separator no-scroll>
+        <q-list dark id="list" no-border link inset-separator no-scroll>
             <q-item v-for="pos in positions" :to=pos._id>
                 <q-item-side icon="computer"/>
                 <q-item-main :label=pos.title :sublabel=pos.description />
@@ -33,5 +33,6 @@ export default class SideBar extends Vue {
 <style>
 #drawer {
   overflow: auto !important;
+  background-color: #343434;
 }
 </style>

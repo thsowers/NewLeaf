@@ -4,16 +4,13 @@
         <!-- Header -->
         <q-layout-header>
 
-            <q-tabs id="nav">
-                <q-route-tab slot="title" icon="person" to="/jobs" replace
+            <q-tabs id="nav" >
+                <q-route-tab slot="title" icon="person" to="/" replace
                              hide="icon" label="Positions"/>
                 <q-route-tab slot="title" icon="map" to="/map" replace
                              hide="icon" label="Locations"/>
                 <q-route-tab slot="title" icon="home" to="/company" replace
                              hide="icon" label="Companies"/>
-
-
-
             </q-tabs>
             <Add/>
         </q-layout-header>
@@ -52,8 +49,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  #drawer {
-  }
+  background-color: #353b48;
 }
 
 #nav {

@@ -12,7 +12,7 @@ const positions = new Vapi({
 })
   .get({
     action: 'getPosition',
-    property: 'positions',
+    property: 'position',
     path: ({ _id }) => `/position/${_id}`,
   })
   .get({
@@ -39,6 +39,8 @@ const positions = new Vapi({
     path: ({ _id }) => `/position/${_id}`,
     onSuccess: (state, payload, axios, { params, data }) => {
       state.positions = state.positions.filter(x => x._id !== params._id)
+      // TODO  Go back to closest active position
+      history.go(-1)
     },
   })
   .getStore()

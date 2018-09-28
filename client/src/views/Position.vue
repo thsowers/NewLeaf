@@ -1,7 +1,10 @@
 <template>
     <div class="position">
+        <div style="" id="newPosition">
+            <q-input dark v-model="position.title" float-label="Title"/>
+            <q-input dark v-model="position.description" float-label="Company"/>
+        </div>
         <q-btn round icon="delete" color="negative" @click="cancel()"/>
-            <h1>{{_id}}</h1>
     </div>
 </template>
 
@@ -11,16 +14,26 @@ import Component from 'vue-class-component'
 import { mapState, mapActions } from 'vuex'
 
 @Component({
-  computed: mapState({
-    positions: state => state.positions,
-  }),
   methods: {
     ...mapActions(['getPosition', 'removePosition']),
   },
-  props: ['_id'],
+  computed: mapState({
+    positions: state => state.positions,
+  }),
+  props: { _id: String },
+  watch: {
+    $route(to, from) {
+      this.getPositionData()
+    },
+  },
 })
 export default class Position extends Vue {
   showLeft = true
+  position = ''
+
+  mounted() {
+    this.getPositionData()
+  }
 
   cancel() {
     console.log('removing')
@@ -37,6 +50,12 @@ export default class Position extends Vue {
         this.$q.notify(_id)
         this.removePosition({ params: { _id: _id } })
       })
+  }
+
+  getPositionData() {
+    this.getPosition({ params: { _id: this._id } }).then(
+      position => (this.position = position.data)
+    )
   }
 }
 </script>
