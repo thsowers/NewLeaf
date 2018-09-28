@@ -13,31 +13,32 @@ const positions = new Vapi({
   .get({
     action: 'getPosition',
     property: 'positions',
-    path: ({ id }) => `/position/${id}`,
+    path: ({ _id }) => `/position/${_id}`,
   })
   .get({
     action: 'getPositions',
     property: 'positions',
     path: '/positions',
   })
+  .put({
+    action: 'addPosition',
+    property: 'position',
+    path: '/position',
+    onSuccess: (state, payload, axios, { params, data }) => {
+      state.positions.push(payload.data)
+    },
+  })
   .post({
     action: 'updatePosition',
     property: 'position',
-    path: ({ id }) => `/position/${id}`,
+    path: ({ _id }) => `/position/${_id}`,
   })
   .delete({
     action: 'removePosition',
     property: 'position',
-    path: ({ id }) => `/position/${id}`,
+    path: ({ _id }) => `/position/${_id}`,
     onSuccess: (state, payload, axios, { params, data }) => {
-      // if you set the onSuccess function you have to set the state manually
-      console.log(data)
-      console.log(params)
-      console.log(state)
-      console.log(payload)
-      console.log(axios)
-      state.posts = payload.data
-      state.post = payload.data[0]
+      state.positions = state.positions.filter(x => x._id !== params._id)
     },
   })
   .getStore()

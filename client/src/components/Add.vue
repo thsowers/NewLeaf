@@ -28,7 +28,8 @@
                         <q-input v-model="title" float-label="Title"/>
                         <q-input v-model="description" float-label="Company"/>
                     </div>
-                    <q-btn @click="addJob" id="submit" color="primary" label="Add New" icon="add" />
+                    <q-btn @click="addJob" id="submit" color="primary"
+                           label="Add New" icon="add"/>
                 </div>
             </q-modal-layout>
         </q-modal>
@@ -36,12 +37,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
 import QBtn from 'quasar-framework/src/components/btn/QBtn'
-import axios from 'axios'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { mapState, mapActions } from 'vuex'
 
 @Component({
   components: { QBtn },
+  computed: mapState({
+    positions: state => state.positions,
+  }),
+  methods: {
+    ...mapActions(['addPosition', 'removePosition']),
+  },
+  props: ['_id'],
 })
 export default class Add extends Vue {
   opened: boolean = false
@@ -53,10 +62,9 @@ export default class Add extends Vue {
   }
 
   addJob() {
-    axios.post('http://localhost:8000/position', {
-      title: this.title,
-      description: this.description,
-    })
+    console.log('removing')
+    const { title, description } = this.$data
+    this.addPosition({ data: { title: title, description: description } })
   }
 }
 </script>
@@ -72,6 +80,7 @@ export default class Add extends Vue {
 #submit {
   margin: 20px;
 }
+
 #add {
   position: absolute;
   right: 16px;

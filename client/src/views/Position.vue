@@ -35,7 +35,7 @@ export default class Position extends Vue {
       })
       .then(() => {
         this.$q.notify(_id)
-        this.removePosition({ params: { id: _id } })
+        this.removePosition({ params: { _id: _id } })
       })
   }
 }
