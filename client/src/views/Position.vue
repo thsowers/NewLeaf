@@ -1,21 +1,66 @@
 <template>
-    <div class="position">
-        <div style="" id="newPosition">
-            <q-input dark v-model="position.title" float-label="Title"/>
-            <q-input dark v-model="position.description" float-label="Company"/>
-        </div>
+    <q-list dark class="position">
+        <q-list-header>Details</q-list-header>
+        <q-item style="" id="newPosition">
+            <q-item-main>
+
+                <q-input dark v-model="position.title" float-label="Title"/>
+                <q-input dark v-model="position.company"
+                         float-label="Company"/>
+                <q-input type="textarea" dark v-model="position.description" float-label="Description"/>
+
+            </q-item-main>
+        </q-item>
+        <q-item-separator />
+        <q-list-header>Location</q-list-header>
+        <q-item style="" id="newPosition">
+            <q-item-main>
+                <q-input dark v-model="position.zipCode"
+                         float-label="Zip Code"/>
+                <q-input dark v-model="position.city" float-label="City"/>
+                <q-input dark v-model="position.state" float-label="State"/>
+                <q-input dark v-model="position.lat" float-label="Latitude"/>
+                <q-input dark v-model="position.lon" float-label="Longitude"/>
+            </q-item-main>
+        </q-item>
+        <q-item-separator />
+        <q-list-header>Contact</q-list-header>
+        <q-item style="" id="newPosition">
+            <q-item-main>
+                <q-input dark v-model="position.first" float-label="First"/>
+                <q-input dark v-model="position.last" float-label="Last"/>
+                <q-input dark v-model="position.email" float-label="Email"/>
+                <q-input dark v-model="position.phone" float-label="Phone"/>
+                <q-input dark v-model="position.github" float-label="Github"/>
+                <q-input dark v-model="position.linkedIn" float-label="LinkedIn"/>
+                <q-input dark v-model="position.HN" float-label="HN"/>
+            </q-item-main>
+        </q-item>
+        <q-item-separator />
+        <q-list-header>Events</q-list-header>
+        <q-item style="" id="newPosition">
+            <q-item-main>
+                <q-input dark v-model="event.title" float-label="First"/>
+                <q-input dark v-model="event.date" float-label="Last"/>
+                <q-input dark v-model="event.attachments" float-label="Email"/>
+                <q-input dark v-model="event.notes" float-label="Phone"/>
+            </q-item-main>
+        </q-item>
         <q-btn round icon="delete" color="negative" @click="cancel()"/>
-    </div>
+        <q-btn icon="delete" color="primary" @click="update()" label="Update"/>
+    </q-list>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { mapState, mapActions } from 'vuex'
+import QCard from 'quasar-framework/src/components/card/QCard'
 
 @Component({
+  components: { QCard },
   methods: {
-    ...mapActions(['getPosition', 'removePosition']),
+    ...mapActions(['getPosition', 'removePosition', 'updatePosition']),
   },
   computed: mapState({
     positions: state => state.positions,
@@ -30,9 +75,15 @@ import { mapState, mapActions } from 'vuex'
 export default class Position extends Vue {
   showLeft = true
   position = ''
+  event = ''
 
   mounted() {
     this.getPositionData()
+  }
+
+  update() {
+    console.log(this.$data.position)
+    this.updatePosition({ data: this.$data.position, params: {_id: this._id} })
   }
 
   cancel() {

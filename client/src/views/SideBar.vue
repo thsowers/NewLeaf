@@ -3,7 +3,7 @@
         <q-list dark id="list" no-border link inset-separator no-scroll>
             <q-item v-for="pos in positions" :to=pos._id>
                 <q-item-side icon="computer"/>
-                <q-item-main :label=pos.title :sublabel=pos.description />
+                <q-item-main :label=pos.company :sublabel=pos.title />
             </q-item>
         </q-list>
     </q-layout-drawer>
@@ -24,9 +24,6 @@ import { mapState, mapActions } from 'vuex'
 })
 export default class SideBar extends Vue {
   showLeft = true
-  mounted() {
-    //this.getPositions()
-  }
 }
 </script>
 

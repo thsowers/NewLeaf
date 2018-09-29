@@ -21,6 +21,8 @@ router.put('/position/', async ctx => {
 })
 
 router.post('/position/:id', async ctx => {
+  console.log(ctx.params.id)
+  console.log(ctx.request.body)
   ctx.body = await positions.update(ctx.params.id, ctx.request.body)
 })
 
