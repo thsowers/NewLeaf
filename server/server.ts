@@ -7,7 +7,13 @@ import Monk from 'monk'
 
 const app = new Koa()
 const router = new Router()
+
 const db = Monk('mongodb://localhost:27017/newleaf')
+
+db.catch(err => {
+  throw new Error(err)
+})
+
 const positions = db.get('positions')
 
 app.use(Json())
@@ -15,7 +21,7 @@ app.use(Parser())
 app.use(Cors())
 app.use(router.routes())
 app.listen(3000)
-
+console.log(db._state)
 router.put('/position/', async ctx => {
   ctx.body = await positions.insert(ctx.request.body)
 })
