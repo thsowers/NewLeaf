@@ -7,10 +7,10 @@
                icon="add"
                @click="openModal"
         />
-        <q-modal v-model="opened"
+        <q-modal dark v-model="opened"
                  :content-css="{minWidth: '80vw', minHeight: '10vh'}">
-            <q-modal-layout>
-                <q-toolbar slot="header">
+            <q-modal-layout dark class="addPosition">
+                <q-toolbar dark slot="header">
                     <q-btn
                             flat
                             round
@@ -23,14 +23,14 @@
                     </q-toolbar-title>
                 </q-toolbar>
 
-                <div class="layout-padding">
+                <form class="layout-padding">
                     <div style="display: flex;" id="newPosition">
-                        <q-input v-model="title" float-label="Title"/>
-                        <q-input v-model="description" float-label="Company"/>
+                        <q-input dark v-model="title" float-label="Title"/>
+                        <q-input dark v-model="company" float-label="Company"/>
                     </div>
-                    <q-btn @click="addJob" id="submit" color="primary"
+                    <q-btn @click="addJob" type="submit" id="submit" color="primary"
                            label="Add New" icon="add"/>
-                </div>
+                </form>
             </q-modal-layout>
         </q-modal>
     </div>
@@ -55,7 +55,7 @@ import { mapState, mapActions } from 'vuex'
 export default class Add extends Vue {
   opened: boolean = false
   title = ''
-  description = ''
+  company = ''
 
   openModal() {
     this.opened = true
@@ -63,8 +63,8 @@ export default class Add extends Vue {
 
   addJob() {
     console.log('removing')
-    const { title, description } = this.$data
-    this.addPosition({ data: { title: title, description: description } })
+    const { title, company } = this.$data
+    this.addPosition({ data: { title: title, company: company } })
   }
 }
 </script>
@@ -75,6 +75,10 @@ export default class Add extends Vue {
     margin-left: 20px;
     width: 300px;
   }
+}
+
+.addPosition {
+    background-color: rgba(53, 55, 64, 0.96) !important;
 }
 
 #submit {
