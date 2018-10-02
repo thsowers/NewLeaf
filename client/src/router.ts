@@ -16,12 +16,12 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/:_id',
+      path: '/position/:_id',
       component: Position,
       props: true,
     },
     {
-      path: '/map',
+      path: '/maps/',
       component: Location,
       props: true,
     },
