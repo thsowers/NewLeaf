@@ -2,13 +2,23 @@
     <q-list dark class="position">
         <q-list-header>Details</q-list-header>
         <q-item style="" id="newPosition">
-            <q-item-main>
-
-                <q-input dark v-model="position.title" float-label="Title"/>
-                <q-input dark v-model="position.company"
+            <q-item-main class="row">
+                <q-input class="col-4" dark v-model="position.title"
+                         float-label="Title"/>
+                <q-input class="col-4" dark v-model="position.company"
                          float-label="Company"/>
-                <q-input type="textarea" dark v-model="position.description" float-label="Description"/>
-
+                <q-select class="col-4"
+                          dark
+                          toggle
+                          v-model="position.status"
+                          :options="selectOptions"
+                          float-label="Status"
+                />
+                <q-input class="col-12" type="textarea" dark
+                         v-model="position.description"
+                         float-label="Description"/>
+                <q-input class="col-6" dark v-model.lazy="position.companyURL"
+                         float-label="URL" @blur="lookupLogo"/>
             </q-item-main>
         </q-item>
         <q-item-separator />
@@ -76,6 +86,40 @@ export default class Position extends Vue {
   showLeft = true
   position = ''
   event = ''
+  selectOptions = [
+    {
+      label: 'Not Started',
+      value: 'notStarted',
+    },
+    {
+      label: 'App Submitted',
+      value: 'appSubmitted',
+    },
+    {
+      label: 'Awaiting Interview',
+      value: 'awaitingInterview',
+    },
+    {
+      label: 'Interview Complete',
+      value: 'interviewComplete',
+    },
+    {
+      label: 'Negotiating',
+      value: 'negotiating',
+    },
+    {
+      label: 'Rejected',
+      value: 'rejected',
+    },
+    {
+      label: 'Rejected - Position Already Filled',
+      value: 'rejectedPositionAlreadyFilled',
+    },
+    {
+      label: 'Accepted',
+      value: 'accepted',
+    },
+  ]
 
   mounted() {
     this.getPositionData()
