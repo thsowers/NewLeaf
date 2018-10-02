@@ -21,7 +21,7 @@
                          float-label="URL" @blur="lookupLogo"/>
             </q-item-main>
         </q-item>
-        <q-item-separator />
+        <q-item-separator/>
         <q-list-header>Location</q-list-header>
         <q-item style="" id="newPosition">
             <q-item-main>
@@ -33,7 +33,7 @@
                 <q-input dark v-model="position.lon" float-label="Longitude"/>
             </q-item-main>
         </q-item>
-        <q-item-separator />
+        <q-item-separator/>
         <q-list-header>Contact</q-list-header>
         <q-item style="" id="newPosition">
             <q-item-main>
@@ -42,11 +42,12 @@
                 <q-input dark v-model="position.email" float-label="Email"/>
                 <q-input dark v-model="position.phone" float-label="Phone"/>
                 <q-input dark v-model="position.github" float-label="Github"/>
-                <q-input dark v-model="position.linkedIn" float-label="LinkedIn"/>
+                <q-input dark v-model="position.linkedIn"
+                         float-label="LinkedIn"/>
                 <q-input dark v-model="position.HN" float-label="HN"/>
             </q-item-main>
         </q-item>
-        <q-item-separator />
+        <q-item-separator/>
         <q-list-header>Events</q-list-header>
         <q-item style="" id="newPosition">
             <q-item-main>
@@ -66,6 +67,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { mapState, mapActions } from 'vuex'
 import QCard from 'quasar-framework/src/components/card/QCard'
+import axios from 'axios'
 
 @Component({
   components: { QCard },
@@ -125,9 +127,34 @@ export default class Position extends Vue {
     this.getPositionData()
   }
 
+  async lookupLogo() {
+    let { _id, companyURL } = this.$data.position
+
+    // Cleanup URLs to get root
+    if (companyURL.includes('http')) {
+      companyURL = companyURL.replace('http://', '')
+      companyURL = companyURL.replace('https://', '')
+    }
+
+    axios
+      .post('http://localhost:3000/logoLookup/' + _id, {
+        url: companyURL,
+      })
+      .then(data => {
+        this.$data.position.companyLogo = data.data
+        this.updatePosition({
+          data: this.$data.position,
+          params: { _id: this._id },
+        })
+      })
+  }
+
   update() {
     console.log(this.$data.position)
-    this.updatePosition({ data: this.$data.position, params: {_id: this._id} })
+    this.updatePosition({
+      data: this.$data.position,
+      params: { _id: this._id },
+    })
   }
 
   cancel() {
@@ -158,5 +185,16 @@ export default class Position extends Vue {
 <style scoped lang="scss">
 .position {
   margin: 30px;
+}
+
+.positionForm {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.positionEntry {
+  flex-grow: 1;
+  width: 50% !important;
+  height: 100px;
 }
 </style>

@@ -5,6 +5,8 @@
   "main": "index.ts",
   "dependencies": {
     "@koa/cors": "^2.2.2",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
     "koa": "^2.5.3",
     "koa-body": "^4.0.4",
     "koa-json": "^2.0.2",
@@ -12,6 +14,7 @@
     "monk": "^6.0.6"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.9",
     "@types/koa": "^2.0.46",
     "@types/koa-json": "^2.0.18",
     "@types/koa-router": "^7.0.32",

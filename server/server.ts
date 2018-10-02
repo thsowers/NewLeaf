@@ -3,6 +3,8 @@ import * as Cors from '@koa/cors'
 import * as Router from 'koa-router'
 import * as Json from 'koa-json'
 import * as Parser from 'koa-body'
+import * as cheerio from 'cheerio'
+import axios from 'axios'
 import Monk from 'monk'
 
 const app = new Koa()
@@ -23,6 +25,7 @@ app.use(router.routes())
 app.listen(3000)
 console.log(db._state)
 router.put('/position/', async ctx => {
+  ctx.request.body.createdOn = Date.now()
   ctx.body = await positions.insert(ctx.request.body)
 })
 
@@ -43,3 +46,26 @@ router.get('/position/:id', async ctx => {
 router.delete('/position/:id', async ctx => {
   ctx.body = await positions.remove(ctx.params.id)
 })
+
+// Lookup Logo
+router.post('/logoLookup/:id', async ctx => {
+  const { data } = await getFaviconAPI(ctx.request.body.url)
+  let iconURL = data.icons[0].src
+  let img = await getBase64FromURL(iconURL)
+  ctx.body = 'data:image/jpeg;base64,' + img
+})
+
+// Utilize antongunov/favicongrabber.com, sites have too much variance in
+// favicon locations these days
+async function getFaviconAPI(url: string) {
+  return await axios.get('https://favicongrabber.com/api/grab/' + url)
+}
+
+// Helper function to get
+async function getBase64FromURL(url: string) {
+  return await axios
+    .get(url, {
+      responseType: 'arraybuffer',
+    })
+    .then(response => new Buffer(response.data, 'binary').toString('base64'))
+}
