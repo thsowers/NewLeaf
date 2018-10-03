@@ -21,7 +21,7 @@ export default new Router({
       props: true,
     },
     {
-      path: '/maps/',
+      path: '/map/',
       component: Location,
       props: true,
     },

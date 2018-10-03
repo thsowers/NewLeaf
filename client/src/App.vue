@@ -1,6 +1,7 @@
 <template>
     <!-- main wrapping component -->
     <q-layout view="hHh Lpr lFf" id="app">
+
         <!-- Header -->
         <q-layout-header>
 
