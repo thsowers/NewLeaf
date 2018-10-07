@@ -1,5 +1,5 @@
 <template>
-    <q-list dark class="position">
+    <q-list dark class="position shadow-4">
         <q-list-header>Details</q-list-header>
         <q-item style="" id="newPosition">
             <q-item-main class="row">
@@ -17,48 +17,71 @@
                 <q-input class="col-12" type="textarea" dark
                          v-model="position.description"
                          float-label="Description"/>
-                <q-input class="col-6" dark v-model.lazy="position.companyURL"
+                <q-input class="col-6" dark
+                         v-model.lazy="position.companyURL"
                          float-label="URL" @blur="lookupLogo"/>
             </q-item-main>
         </q-item>
         <q-item-separator/>
         <q-list-header>Location</q-list-header>
         <q-item style="" id="newPosition">
-            <q-item-main>
-                <q-input dark v-model="position.zipCode"
+            <q-item-main class="row">
+                <q-input class="col-12" dark v-model="position.zipCode"
+                         float-label="Address"/>
+                <q-input class="col-2" dark v-model="position.zipCode"
                          float-label="Zip Code"/>
-                <q-input dark v-model="position.city" float-label="City"/>
-                <q-input dark v-model="position.state" float-label="State"/>
-                <q-input dark v-model="position.lat" float-label="Latitude"/>
-                <q-input dark v-model="position.lon" float-label="Longitude"/>
+                <q-input class="col-4" dark v-model="position.city"
+                         float-label="City"/>
+                <q-input class="col-2" dark v-model="position.state"
+                         float-label="State"/>
+                <q-input class="col-2" dark v-model="position.lat"
+                         float-label="Latitude"/>
+                <q-input class="col-2" dark v-model="position.lon"
+                         float-label="Longitude"/>
             </q-item-main>
         </q-item>
         <q-item-separator/>
         <q-list-header>Contact</q-list-header>
         <q-item style="" id="newPosition">
-            <q-item-main>
-                <q-input dark v-model="position.first" float-label="First"/>
-                <q-input dark v-model="position.last" float-label="Last"/>
-                <q-input dark v-model="position.email" float-label="Email"/>
-                <q-input dark v-model="position.phone" float-label="Phone"/>
-                <q-input dark v-model="position.github" float-label="Github"/>
-                <q-input dark v-model="position.linkedIn"
+            <q-item-main class="row">
+                <q-input class="col-6" dark v-model="position.first"
+                         float-label="First"/>
+                <q-input class="col-6" dark v-model="position.last"
+                         float-label="Last"/>
+                <q-input class="col-4" dark v-model="position.email"
+                         float-label="Email"/>
+                <q-input class="col-4" dark v-model="position.phone"
+                         float-label="Phone"/>
+                <q-input class="col-4" dark v-model="position.github"
+                         float-label="Github"/>
+                <q-input class="col-4" dark v-model="position.linkedIn"
                          float-label="LinkedIn"/>
-                <q-input dark v-model="position.HN" float-label="HN"/>
+                <q-input class="col-4" dark v-model="position.HN"
+                         float-label="HN"/>
+                <q-input class="col-4" dark v-model="position.keybase"
+                         float-label="Keybase"/>
+
             </q-item-main>
         </q-item>
         <q-item-separator/>
         <q-list-header>Events</q-list-header>
         <q-item style="" id="newPosition">
-            <q-item-main>
-                <q-input dark v-model="event.title" float-label="First"/>
-                <q-input dark v-model="event.date" float-label="Last"/>
-                <q-input dark v-model="event.attachments" float-label="Email"/>
-                <q-input dark v-model="event.notes" float-label="Phone"/>
+            <q-item-main class="row">
+                <q-input class="col-8" dark v-model="event.title"
+                         float-label="Title"/>
+                <q-input class="col-4" dark v-model="event.date"
+                         float-label="Date"/>
+                <q-input class="col-8" dark v-model="event.notes"
+                         type="textarea" float-label="Notes"/>
+                <q-uploader class="col-4" dark float-label="Attachments"/>
             </q-item-main>
         </q-item>
-        <q-btn round icon="delete" color="negative" @click="cancel()"/>
-        <q-btn icon="delete" color="primary" @click="update()" label="Update"/>
+        <div class="q-pa-sm" style="height: 60px">
+            <q-btn class="float-right on-right" icon="save" color="primary"
+                   @click="update()" label="Update"/>
+            <q-btn class="float-right" icon="delete" color="negative"
+                   @click="cancel()" label="Remove"/>
+        </div>
     </q-list>
 </template>
 
@@ -68,9 +91,10 @@ import Component from 'vue-class-component'
 import { mapState, mapActions } from 'vuex'
 import QCard from 'quasar-framework/src/components/card/QCard'
 import axios from 'axios'
+import QItemSeparator from 'quasar-framework/src/components/list/QItemSeparator'
 
 @Component({
-  components: { QCard },
+  components: { QItemSeparator, QCard },
   methods: {
     ...mapActions(['getPosition', 'removePosition', 'updatePosition']),
   },
@@ -183,18 +207,22 @@ export default class Position extends Vue {
 </script>
 
 <style scoped lang="scss">
+.q-input,
+q-select {
+  margin-right: 15px !important;
+}
+
+.col-4 {
+  width: 30% !important;
+}
+
+.col-2 {
+  width: 15% !important;
+}
+
 .position {
   margin: 30px;
-}
-
-.positionForm {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.positionEntry {
-  flex-grow: 1;
-  width: 50% !important;
-  height: 100px;
+  border: none;
+  background-color: #343434;
 }
 </style>
