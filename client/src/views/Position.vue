@@ -1,88 +1,115 @@
 <template>
-    <q-list dark class="position shadow-4">
-        <q-list-header>Details</q-list-header>
-        <q-item style="" id="newPosition">
-            <q-item-main class="row">
-                <q-input class="col-4" dark v-model="position.title"
-                         float-label="Title"/>
-                <q-input class="col-4" dark v-model="position.company"
-                         float-label="Company"/>
-                <q-select class="col-4"
-                          dark
-                          toggle
-                          v-model="position.status"
-                          :options="selectOptions"
-                          float-label="Status"
-                />
-                <q-input class="col-12" type="textarea" dark
-                         v-model="position.description"
-                         float-label="Description"/>
-                <q-input class="col-6" dark
-                         v-model.lazy="position.companyURL"
-                         float-label="URL" @blur="lookupLogo"/>
-            </q-item-main>
-        </q-item>
-        <q-item-separator/>
-        <q-list-header>Location</q-list-header>
-        <q-item style="" id="newPosition">
-            <q-item-main class="row">
-                <q-input class="col-12" dark v-model="position.zipCode"
-                         float-label="Address"/>
-                <q-input class="col-2" dark v-model="position.zipCode"
-                         float-label="Zip Code"/>
-                <q-input class="col-4" dark v-model="position.city"
-                         float-label="City"/>
-                <q-input class="col-2" dark v-model="position.state"
-                         float-label="State"/>
-                <q-input class="col-2" dark v-model="position.lat"
-                         float-label="Latitude"/>
-                <q-input class="col-2" dark v-model="position.lon"
-                         float-label="Longitude"/>
-            </q-item-main>
-        </q-item>
-        <q-item-separator/>
-        <q-list-header>Contact</q-list-header>
-        <q-item style="" id="newPosition">
-            <q-item-main class="row">
-                <q-input class="col-6" dark v-model="position.first"
-                         float-label="First"/>
-                <q-input class="col-6" dark v-model="position.last"
-                         float-label="Last"/>
-                <q-input class="col-4" dark v-model="position.email"
-                         float-label="Email"/>
-                <q-input class="col-4" dark v-model="position.phone"
-                         float-label="Phone"/>
-                <q-input class="col-4" dark v-model="position.github"
-                         float-label="Github"/>
-                <q-input class="col-4" dark v-model="position.linkedIn"
-                         float-label="LinkedIn"/>
-                <q-input class="col-4" dark v-model="position.HN"
-                         float-label="HN"/>
-                <q-input class="col-4" dark v-model="position.keybase"
-                         float-label="Keybase"/>
+    <div class="row position shadow-4">
+        <div class="col-8">
+            <q-list dark class="no-border">
+                <q-list-header>Details</q-list-header>
+                <q-item style="" id="newPosition">
+                    <q-item-main class="row">
+                        <q-input class="col-4" dark v-model="position.company"
+                                 float-label="Company"/>
+                        <q-input class="col-4" dark v-model="position.title"
+                                 float-label="Title"/>
+                        <q-select class="col-4"
+                                  dark
+                                  toggle
+                                  v-model="position.status"
+                                  :options="selectOptions"
+                                  float-label="Status"
+                                  @input="updateStatus"
+                        />
+                        <q-input class="col-12" type="textarea" dark
+                                 v-model="position.description"
+                                 float-label="Description"/>
+                        <q-input class="col-6" dark
+                                 v-model.lazy="position.companyURL"
+                                 float-label="URL" @blur="lookupLogo"/>
+                    </q-item-main>
+                </q-item>
+                <q-item-separator/>
+                <q-list-header>Location</q-list-header>
+                <q-item style="" id="newPosition">
+                    <q-item-main class="row">
+                        <q-input class="col-12" dark v-model="position.zipCode"
+                                 float-label="Address"/>
+                        <q-input class="col-2" dark v-model="position.zipCode"
+                                 float-label="Zip Code"/>
+                        <q-input class="col-4" dark v-model="position.city"
+                                 float-label="City"/>
+                        <q-input class="col-2" dark v-model="position.state"
+                                 float-label="State"/>
+                        <q-input class="col-2" dark v-model="position.lat"
+                                 float-label="Latitude"/>
+                        <q-input class="col-2" dark v-model="position.lon"
+                                 float-label="Longitude"/>
+                    </q-item-main>
+                </q-item>
+                <q-item-separator/>
+                <q-list-header>Contact</q-list-header>
+                <q-item style="" id="newPosition">
+                    <q-item-main class="row">
+                        <q-input class="col-6" dark v-model="position.first"
+                                 float-label="First"/>
+                        <q-input class="col-6" dark v-model="position.last"
+                                 float-label="Last"/>
+                        <q-input class="col-4" dark v-model="position.email"
+                                 float-label="Email"/>
+                        <q-input class="col-4" dark v-model="position.phone"
+                                 float-label="Phone"/>
+                        <q-input class="col-4" dark v-model="position.github"
+                                 float-label="Github"/>
+                        <q-input class="col-4" dark v-model="position.linkedIn"
+                                 float-label="LinkedIn"/>
+                        <q-input class="col-4" dark v-model="position.HN"
+                                 float-label="HN"/>
+                        <q-input class="col-4" dark v-model="position.keybase"
+                                 float-label="Keybase"/>
 
-            </q-item-main>
-        </q-item>
-        <q-item-separator/>
-        <q-list-header>Events</q-list-header>
-        <q-item style="" id="newPosition">
-            <q-item-main class="row">
-                <q-input class="col-8" dark v-model="event.title"
-                         float-label="Title"/>
-                <q-input class="col-4" dark v-model="event.date"
-                         float-label="Date"/>
-                <q-input class="col-8" dark v-model="event.notes"
-                         type="textarea" float-label="Notes"/>
-                <q-uploader class="col-4" dark float-label="Attachments"/>
-            </q-item-main>
-        </q-item>
-        <div class="q-pa-sm" style="height: 60px">
-            <q-btn class="float-right on-right" icon="save" color="primary"
-                   @click="update()" label="Update"/>
-            <q-btn class="float-right" icon="delete" color="negative"
-                   @click="cancel()" label="Remove"/>
+                    </q-item-main>
+                </q-item>
+                <q-item-separator/>
+                <q-list-header>Events</q-list-header>
+                <q-item style="" id="newPosition">
+                    <q-item-main class="row">
+                        <q-input class="col-8" dark v-model="event.name"
+                                 float-label="Title"/>
+                        <q-datetime type="date" class="col-4" dark
+                                    v-model="event.date"
+                                    float-label="Date"/>
+                        <q-input class="col-8" dark v-model="event.description"
+                                 float-label="Details"/>
+                        <q-uploader :url=uploadURL class="col-4" dark
+                                    float-label="Attachments"/>
+                    </q-item-main>
+
+                </q-item>
+                <div class="q-pa-sm" style="height: 60px">
+                    <q-btn class="float-right on-right" icon="save"
+                           color="primary"
+                           @click="addEvent()" label="Add Event"/>
+                </div>
+                <div class="q-pa-sm" style="height: 60px">
+                    <q-btn class="float-right on-right" icon="save"
+                           color="primary"
+                           @click="update()" label="Update"/>
+                    <q-btn class="float-right" icon="delete" color="negative"
+                           @click="cancel()" label="Remove"/>
+                </div>
+            </q-list>
         </div>
-    </q-list>
+        <div class="col-4">
+            <q-timeline dark responsive>
+                <q-timeline-entry v-for="e in position.events"
+                                  :title=e.name
+                                  :subtitle=computeDatePretty(e.timestamp)>
+                    <div>
+                        {{e.description}}
+                    </div>
+                </q-timeline-entry>
+            </q-timeline>
+        </div>
+    </div>
+
+
 </template>
 
 <script lang="ts">
@@ -92,9 +119,11 @@ import { mapState, mapActions } from 'vuex'
 import QCard from 'quasar-framework/src/components/card/QCard'
 import axios from 'axios'
 import QItemSeparator from 'quasar-framework/src/components/list/QItemSeparator'
+import moment from 'moment'
+import QDatetime from 'quasar-framework/src/components/datetime/QDatetime'
 
 @Component({
-  components: { QItemSeparator, QCard },
+  components: { QDatetime, QItemSeparator, QCard },
   methods: {
     ...mapActions(['getPosition', 'removePosition', 'updatePosition']),
   },
@@ -110,8 +139,9 @@ import QItemSeparator from 'quasar-framework/src/components/list/QItemSeparator'
 })
 export default class Position extends Vue {
   showLeft = true
-  position = ''
-  event = ''
+  position = {}
+  uploadURL = ''
+  event = { date: new Date() }
   selectOptions = [
     {
       label: 'Not Started',
@@ -151,6 +181,10 @@ export default class Position extends Vue {
     this.getPositionData()
   }
 
+  computeDatePretty(timeStamp) {
+    return moment(timeStamp).format('MMM DD')
+  }
+
   async lookupLogo() {
     let { _id, companyURL } = this.$data.position
 
@@ -174,11 +208,18 @@ export default class Position extends Vue {
   }
 
   update() {
-    console.log(this.$data.position)
     this.updatePosition({
       data: this.$data.position,
       params: { _id: this._id },
     })
+  }
+
+  addEvent() {
+    // TODO: Keep array sorted by timestamp
+    this.$data.event.timestamp = new Date(this.$data.event.date)
+    this.$data.position.events.push(this.$data.event)
+    this.update()
+    this.$data.event = {}
   }
 
   cancel() {

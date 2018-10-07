@@ -27,6 +27,7 @@
                     <div style="display: flex;" id="newPosition">
                         <q-input dark v-model="title" float-label="Title"/>
                         <q-input dark v-model="company" float-label="Company"/>
+                        <q-input dark v-model="source" float-label="Source"/>
                     </div>
                     <q-btn @click="addJob" type="submit" id="submit" color="primary"
                            label="Add New" icon="add"/>
@@ -56,6 +57,7 @@ export default class Add extends Vue {
   opened: boolean = false
   title = ''
   company = ''
+  source = ''
 
   openModal() {
     this.opened = true
@@ -63,8 +65,10 @@ export default class Add extends Vue {
 
   addJob() {
     console.log('removing')
-    const { title, company } = this.$data
-    this.addPosition({ data: { title: title, company: company } })
+    const { title, company, source } = this.$data
+    this.addPosition({
+      data: { title: title, company: company, source: source },
+    })
   }
 }
 </script>
@@ -78,7 +82,7 @@ export default class Add extends Vue {
 }
 
 .addPosition {
-    background-color: rgba(53, 55, 64, 0.96) !important;
+  background-color: rgba(53, 55, 64, 0.96) !important;
 }
 
 #submit {

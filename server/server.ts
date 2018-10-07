@@ -25,7 +25,11 @@ app.use(router.routes())
 app.listen(3000)
 console.log(db._state)
 router.put('/position/', async ctx => {
-  ctx.request.body.createdOn = Date.now()
+  ctx.request.body.events = new Array({
+    name: 'Created',
+    details: ctx.request.body.source,
+    timestamp: Date.now(),
+  })
   ctx.body = await positions.insert(ctx.request.body)
 })
 
