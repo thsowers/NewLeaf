@@ -1,6 +1,6 @@
 <template>
-    <div class="row position shadow-4">
-        <div class="col-8">
+    <div class="position shadow-4">
+        <div class="details">
             <q-list dark class="no-border">
                 <q-list-header>Details</q-list-header>
                 <q-item style="" id="newPosition">
@@ -33,7 +33,7 @@
                                  float-label="Address"/>
                         <q-input class="col-2" dark v-model="position.zipCode"
                                  float-label="Zip Code"/>
-                        <q-input class="col-4" dark v-model="position.city"
+                        <q-input class="col-3" dark v-model="position.city"
                                  float-label="City"/>
                         <q-input class="col-2" dark v-model="position.state"
                                  float-label="State"/>
@@ -49,7 +49,7 @@
                     <q-item-main class="row">
                         <q-input class="col-6" dark v-model="position.first"
                                  float-label="First"/>
-                        <q-input class="col-6" dark v-model="position.last"
+                        <q-input class="col-5" dark v-model="position.last"
                                  float-label="Last"/>
                         <q-input class="col-4" dark v-model="position.email"
                                  float-label="Email"/>
@@ -67,26 +67,6 @@
                     </q-item-main>
                 </q-item>
                 <q-item-separator/>
-                <q-list-header>Events</q-list-header>
-                <q-item style="" id="newPosition">
-                    <q-item-main class="row">
-                        <q-input class="col-8" dark v-model="event.name"
-                                 float-label="Title"/>
-                        <q-datetime type="date" class="col-4" dark
-                                    v-model="event.date"
-                                    float-label="Date"/>
-                        <q-input class="col-8" dark v-model="event.description"
-                                 float-label="Details"/>
-                        <q-uploader :url=uploadURL class="col-4" dark
-                                    float-label="Attachments"/>
-                    </q-item-main>
-
-                </q-item>
-                <div class="q-pa-sm" style="height: 60px">
-                    <q-btn class="float-right on-right" icon="save"
-                           color="primary"
-                           @click="addEvent()" label="Add Event"/>
-                </div>
                 <div class="q-pa-sm" style="height: 60px">
                     <q-btn class="float-right on-right" icon="save"
                            color="primary"
@@ -96,7 +76,7 @@
                 </div>
             </q-list>
         </div>
-        <div class="col-4">
+        <div class="timeline">
             <q-timeline dark responsive>
                 <q-timeline-entry v-for="e in position.events"
                                   :title=e.name
@@ -106,6 +86,24 @@
                     </div>
                 </q-timeline-entry>
             </q-timeline>
+            <div class="newEvent">
+                <q-input dark v-model="event.name"
+                         float-label="Title"/>
+                <q-datetime type="date" dark
+                            v-model="event.date"
+                            float-label="Date"/>
+                <q-input dark v-model="event.description"
+                         float-label="Details"/>
+                <q-uploader :url=uploadURL dark
+                            float-label="Attachments"/>
+                <div class="q-pa-sm" style="height: 60px">
+
+                    <q-btn class="float-right" icon="save"
+                           style="margin-top: 10px"
+                           color="primary"
+                           @click="addEvent()" label="Add Event"/>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -249,8 +247,16 @@ export default class Position extends Vue {
 
 <style scoped lang="scss">
 .q-input,
-q-select {
+.q-select,
+.q-datetime {
   margin-right: 15px !important;
+}
+
+.newEvent {
+  width: 300px;
+  margin-top: 94%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .col-4 {
@@ -264,6 +270,17 @@ q-select {
 .position {
   margin: 30px;
   border: none;
-  background-color: #343434;
+  position: relative;
+  background-color: #262626;
+  .details {
+    display: inline-block;
+    width: 66%;
+    background-color: #343434;
+  }
+
+  .timeline {
+    display: inline-block;
+    position: absolute;
+  }
 }
 </style>
